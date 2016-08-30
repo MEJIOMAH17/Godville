@@ -3,6 +3,7 @@
 Для работы необходимо 
 1)На странице https://godville.net/user/profile включить опцию "Оперативные данные в API" 
 2)Держать icon_128.png в том же катологе что и jar файл. 
+3) Установленный пакет libjava-gnome-java 
 
 Скачать готовую программу можно из каталога bin. Запуск java -jar Godville.jar -god_name "имя моего бога".
 Справка java -jar Godville.jar -help
