@@ -1,18 +1,12 @@
 package godvile;
 
-/**
- * Created by mark on 26.08.16.
- */
 
 import dorkbox.systemTray.MenuEntry;
 import dorkbox.systemTray.SystemTray;
 import dorkbox.systemTray.SystemTrayMenuAction;
 
-import javax.swing.*;
-import java.io.IOException;
-
 class Tray implements Runnable{
-SystemTray systemTray;
+private SystemTray systemTray;
 
     @Override
     public void run() {
@@ -20,7 +14,7 @@ SystemTray systemTray;
         if (systemTray == null) {
             throw new RuntimeException("Unable to load SystemTray!");
         }
-        systemTray.setIcon("/home/mark/Загрузки/TIJ4-code/Godvile/src/images/icon_128.png");
+        systemTray.setIcon(Constants.getImageWay());
         systemTray.addMenuEntry("Quit", new SystemTrayMenuAction() {
             @Override
             public

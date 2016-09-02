@@ -10,10 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
 
-/**
- * Created by mark on 24.08.16.
- */
- class Diary implements Runnable {
+ class Diary {
     private Date lastRequest;
     private String lastEntry;
     private URL apiURL;
@@ -23,7 +20,7 @@ import java.util.Date;
      *
      * @param name God Name
      */
-    public Diary(String name){
+     Diary(String name){
         try {
             apiURL=new URL("http://godville.net/gods/api/"+name+".json");
         } catch (MalformedURLException e) {
@@ -31,7 +28,7 @@ import java.util.Date;
         }
     }
 
-    public Diary(String name, File diaryFile){
+     Diary(String name, File diaryFile){
         this(name);
         this.diaryFile=diaryFile;
     }
@@ -56,35 +53,20 @@ import java.util.Date;
         if (lastRequest!=null &&lastRequest.getTime()+Constants.getRequestDelay()>System.currentTimeMillis()) return;
         try {
             JSONObject jsonObject= (JSONObject) new JSONParser().parse(getJSON());
-            String entry=(String) jsonObject.get("diary_last");
-            lastEntry=entry;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+            lastEntry=(String) jsonObject.get("diary_last");;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public synchronized String getLastEntry(){
+   synchronized String getLastEntry(){
         getEntry();
         return lastEntry;
     }
 
-    public File getDiaryFile() {
+     File getDiaryFile() {
         return diaryFile;
     }
 
-    @Override
-    public void run() {
-        try {
-            JSONParser parser=new JSONParser();
-            JSONObject jsonObject= (JSONObject) parser.parse(getJSON());
-            String entry=(String) jsonObject.get("diary_last");
-            lastEntry=entry;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
+
 }
